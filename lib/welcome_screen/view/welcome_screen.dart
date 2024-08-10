@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:xian_infotech_interview/login_screen/view/login_screen.dart';
 import 'package:xian_infotech_interview/utils/asset_paths.dart';
+import 'package:xian_infotech_interview/utils/custom_page_route.dart';
 import 'package:xian_infotech_interview/utils/custom_widgets/custom_button.dart';
 import 'package:xian_infotech_interview/welcome_screen/view/widgets/logo_section.dart';
 
@@ -47,7 +49,12 @@ class WelcomeScreen extends StatelessWidget {
                     buttonHeight: screenHeight * 0.065,
                     buttonWidth: screenWidth * 0.5,
                     borderRadius: 30,
-                    onTap: () {},
+                    onTap: () {
+                      NavigationUtils.pushReplacement(
+                        context,
+                        const LoginScreen(),
+                      );
+                    },
                     childWidget: Text(
                       "Get Started",
                       style: GoogleFonts.rubik(
