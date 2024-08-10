@@ -41,4 +41,19 @@ class AssetPaths {
 
   // Path to the user icon.
   static String userIcon = "$basePathForIcons/user.png";
+
+  // Path to the menu icon.
+  static String menuIcon = "$basePathForIcons/menu.png";
+
+  // Path to the bell icon.
+  static String bellIcon = "$basePathForIcons/bell.png";
+
+  // Path to the Dashboard card bg image.
+  static String bgImage = "$basePathForImages/dash_board_card.png";
+
+  // Path to the Transaction card bg image.
+  static String transactionImage = "$basePathForImages/transaction_card.png";
+
+  // Path to the Help provided card bg image.
+  static String helpImage = "$basePathForImages/help_provided_card.png";
 }

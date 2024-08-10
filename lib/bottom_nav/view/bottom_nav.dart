@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:xian_infotech_interview/home_screen/view/home_screen.dart';
 import 'package:xian_infotech_interview/utils/asset_paths.dart';
 import '../provider/bottom_nav_provider.dart';
 import 'widgets/bottom_nav_icon.dart';
@@ -9,7 +10,7 @@ class BottomNav extends StatelessWidget {
   BottomNav({super.key});
 
   final pages = [
-    const Page2(),
+    const HomeScreen(),
     const Page2(),
     const Page2(),
     const Page2(),

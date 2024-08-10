@@ -1,18 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:xian_infotech_interview/bottom_nav/view/bottom_nav.dart';
 import 'package:xian_infotech_interview/login_screen/view/widgets/header_image.dart';
-import 'package:xian_infotech_interview/utils/custom_colors.dart';
 import 'package:xian_infotech_interview/utils/custom_page_route.dart';
 import 'package:xian_infotech_interview/utils/custom_widgets/custom_button.dart';
 
-import '../../utils/asset_paths.dart';
-import '../../utils/custom_widgets/custom_text_form_field.dart';
-import '../provider/login_screen_provider.dart';
 import 'widgets/footer_section.dart';
 import 'widgets/login_form.dart';
 import 'widgets/forgot_password_section.dart';
