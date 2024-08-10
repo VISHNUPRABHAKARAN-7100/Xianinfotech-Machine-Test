@@ -18,14 +18,10 @@ class NavigationUtils {
   }
 
   // Push a new page and remove all the pages until a specific page
-  static void pushAndRemoveUntil(
-      BuildContext context, Widget page, Widget untilPage) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      CustomPageRoute(page: page),
-      ModalRoute.withName(
-          Navigator.defaultRouteName), // Or a specific route name
-    );
+  static void pushAndRemoveUntil(BuildContext context, Widget page) {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      return page;
+    }), (route) => false);
   }
 }
 

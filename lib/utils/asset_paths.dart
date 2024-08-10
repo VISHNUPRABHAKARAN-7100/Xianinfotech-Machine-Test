@@ -26,4 +26,19 @@ class AssetPaths {
   // Path to the visibility icon and invisibility icon.
   static String visibilityIcon = "$basePathForIcons/visibility.png";
   static String invisibilityIcon = "$basePathForIcons/invisibility.png";
+
+  // Path to the home icon.
+  static String homeIcon = "$basePathForIcons/home.png";
+
+  // Path to the dashboard icon.
+  static String dashboardIcon = "$basePathForIcons/dashboard.png";
+
+  // Path to the job card icon.
+  static String jobCardIcon = "$basePathForIcons/job_card.png";
+
+  // Path to the server icon.
+  static String serverIcon = "$basePathForIcons/server.png";
+
+  // Path to the user icon.
+  static String userIcon = "$basePathForIcons/user.png";
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:xian_infotech_interview/bottom_nav/provider/bottom_nav_provider.dart';
 import 'package:xian_infotech_interview/login_screen/provider/login_screen_provider.dart';
 import 'package:xian_infotech_interview/welcome_screen/view/welcome_screen.dart';
 
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => LoginScreenProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => BottomNavProvider(),
           )
         ],
         child: MaterialApp(

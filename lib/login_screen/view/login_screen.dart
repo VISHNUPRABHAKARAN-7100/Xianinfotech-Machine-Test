@@ -1,12 +1,21 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:xian_infotech_interview/login_screen/provider/login_screen_provider.dart';
-import 'package:xian_infotech_interview/utils/asset_paths.dart';
+import 'package:xian_infotech_interview/bottom_nav/view/bottom_nav.dart';
+import 'package:xian_infotech_interview/login_screen/view/widgets/header_image.dart';
 import 'package:xian_infotech_interview/utils/custom_colors.dart';
+import 'package:xian_infotech_interview/utils/custom_page_route.dart';
 import 'package:xian_infotech_interview/utils/custom_widgets/custom_button.dart';
-import 'package:xian_infotech_interview/utils/custom_widgets/custom_text_form_field.dart';
+
+import '../../utils/asset_paths.dart';
+import '../../utils/custom_widgets/custom_text_form_field.dart';
+import '../provider/login_screen_provider.dart';
+import 'widgets/footer_section.dart';
+import 'widgets/login_form.dart';
+import 'widgets/forgot_password_section.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,7 +31,6 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     // Retrieves the size of the device screen.
@@ -40,95 +48,20 @@ class _LoginScreenState extends State<LoginScreen> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                  height: screenHeight * 0.4,
-                  child: Center(
-                    child: Image.asset(
-                      AssetPaths.profile,
-                      width: screenHeight * 0.2,
-                      height: screenHeight * 0.2,
-                      cacheHeight: (screenHeight * 0.2).toInt(),
-                      cacheWidth: (screenHeight * 0.2).toInt(),
-                    ),
-                  ),
-                ),
-                Form(
-                  key: _formKey,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          prefixIcon: Image.asset(
-                            AssetPaths.messageIcon,
-                          ),
-                          labelText: "Username",
-                          validator: (p0) {
-                            return null;
-                          },
-                          textEditingController: _userNameTextEditingController,
-                          suffixIcon: Image.asset(
-                            AssetPaths.checkIcon,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Consumer<LoginScreenProvider>(
-                          builder: (context, snapShot, child) =>
-                              CustomTextFormField(
-                            obscureText: snapShot.isPasswordVisible,
-                            prefixIcon: Image.asset(
-                              AssetPaths.lockIcon,
-                            ),
-                            labelText: "Password",
-                            textInputAction: TextInputAction.send,
-                            validator: (p0) {
-                              return null;
-                            },
-                            // onChanged function for enable the
-                            // visibility of eye button.
-                            onChanged: (value) =>
-                                snapShot.updatePassword(value),
-                            textEditingController:
-                                _passwordTextEditingController,
-                            suffixIcon: snapShot.shouldShowVisibilityIcon
-                                ? GestureDetector(
-                                    onTap: () =>
-                                        snapShot.changePasswordVisibility(),
-                                    child: Image.asset(
-                                      snapShot.isPasswordVisible
-                                          ? AssetPaths.invisibilityIcon
-                                          : AssetPaths.visibilityIcon,
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                const HeaderImage(),
                 const SizedBox(height: 10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: Text(
-                          "Forgot Password?",
-                          style: GoogleFonts.rubik(
-                            color: CustomColors.mainBlue,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                // Below login form contains,
+                // TextField for username and password
+                LoginForm(
+                  formKey: _formKey,
+                  userNameTextEditingController: _userNameTextEditingController,
+                  passwordTextEditingController: _passwordTextEditingController,
                 ),
+
+                const ForgotPasswordSection(),
+
                 const SizedBox(height: 10),
+
                 Material(
                   elevation: 30,
                   shadowColor: const Color(0xFFE43598),
@@ -137,7 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     buttonWidth: screenWidth * 0.5,
                     buttonHeight: screenHeight * 0.06,
                     borderRadius: 30,
-                    onTap: () {},
+                    onTap: () {
+                      NavigationUtils.pushAndRemoveUntil(
+                        context,
+                        BottomNav(),
+                      );
+                    },
                     childWidget: Text(
                       "LOGIN",
                       style: GoogleFonts.rubik(
@@ -148,48 +86,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: screenHeight * 0.15),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Don't have an account?",
-                        style: GoogleFonts.rubik(
-                          color: const Color(0xffA2A2A2),
-                        ),
-                      ),
-                      TextSpan(
-                        text: " Register now?",
-                        style: GoogleFonts.rubik(
-                          color: CustomColors.mainBlue,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 30),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "By signing up, you are agree with our",
-                        style: GoogleFonts.rubik(
-                          color: const Color(0xffA2A2A2),
-                        ),
-                      ),
-                      TextSpan(
-                        text: " Terms & Conditions",
-                        style: GoogleFonts.rubik(
-                          color: CustomColors.mainBlue,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
+                // Below widget will contains,
+                // 1. Register now button.
+                // 2. Terms and conditions button.
+                const FooterSection(),
               ],
             ),
           ),
